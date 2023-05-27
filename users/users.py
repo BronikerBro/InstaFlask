@@ -79,6 +79,10 @@ def delete():
     if check_id():
         return redirect(url_for("users.register"))
     user = User.query.filter_by(id=session.get("user_id")).first()
+    posts = Img.query.filter_by(user_id=session.get("user_id"))
+    for post in posts:
+        db.session.delete(post)
+        db.session.commit()
     db.session.delete(user)
     db.session.commit()
     session["user_id"] = 0
