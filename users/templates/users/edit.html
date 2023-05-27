@@ -1,0 +1,66 @@
+{% extends 'users/base.html' %}
+
+{% block title %}
+<title>Register</title>
+<style>
+body{
+    padding-top: 15vh;
+    min-height: 100vh;
+    background-image: url("https://www.metoffice.gov.uk/binaries/content/gallery/metofficegovuk/hero-images/advice/maps-satellite-images/satellite-image-of-globe.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+}
+    .form{
+        width: 505px;
+        height: 450px;
+        margin: 0 auto;
+        background-color: rgba(0, 167, 255, 0.5);
+        padding: 20px;
+        text-align: center;
+        border: 10px rgba(255, 255, 255, 0.5) solid;
+        border-radius: 30px;
+    }
+    .input{
+        margin: 20px 0;
+        display: block;
+    }
+    .txt{
+        font-size: 50px;
+        color: white;
+        font-family: Arial;
+        font-weight: 1000;
+    }
+    .sq{
+        font-size: 20px;
+        color: white;
+        font-family: Arial;
+        font-weight: 1000;
+    }
+    .flash{
+        font-style: italic;
+        color: rgb(255, 100, 100);
+        font-weight: 1000;
+        -webkit-text-stroke-color: rgb(73, 73, 73);
+        -webkit-text-stroke-width: 2px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<form action="{{  url_for('.edit') }}" enctype="multipart/form-data" method="POST" class="form">
+    <h1 class="txt">Edit</h1>
+    <input type="file" class="input form-control" id="pic" name="pic"/>
+    <p class="sq">(select square image)</p>
+    <input type="text" class="input form-control" placeholder="Username" name="username" value="{{user.name}}" required>
+    <input type="text" class="input form-control" placeholder="Info about you" value="{{user.info}}" name="info" required>
+    <input type="submit" class="input btn btn-primary" value="Edit">
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <h3 class="flash">{{ message }}</h3>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+</form>
+
+{% endblock %}
